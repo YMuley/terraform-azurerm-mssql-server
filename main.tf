@@ -24,7 +24,7 @@ resource "azurerm_mssql_server" "sql_server"{
       for_each = each.value.azuread_administrator
       content {
         type = "UserAssigned"
-        identity_ids = var.user_assigned_identity_output[azuread_administrator.value.login_username].id
+        identity_ids = var.user_assigned_identity_output[each.value.azuread_administrator.login_username].id
       }
     } 
 
