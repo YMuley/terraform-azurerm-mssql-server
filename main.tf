@@ -24,11 +24,11 @@ resource "azurerm_mssql_server" "sql_server"{
       for_each = each.value.azuread_administrator
       content {
         type = "UserAssigned"
-        identity_ids = var.user_assigned_identity_output[each.value.azuread_administrator.value.login_username].id
+        identity_ids = var.user_assigned_identity_output[each.value.azuread_administrator.login_username].id
       }
     } 
 
-    primary_user_assigned_identity_id            = var.user_assigned_identity_output[each.value.azuread_administrator.value.login_username].id
+    primary_user_assigned_identity_id            = var.user_assigned_identity_output[each.value.azuread_administrator.login_username].id
     transparent_data_encryption_key_vault_key_id = var.key_vault_output[each.value.key_vault_name].id
     
 }
